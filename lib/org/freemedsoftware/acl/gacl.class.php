@@ -183,7 +183,10 @@ class gacl {
 	function debug_text($text) {
 
 		if ($this->_debug) {
-			echo "$text<br>\n";
+			//Write to syslog to not loose the debug messages
+			syslog(LOG_DEBUG, "$text<br>\n";
+			//Original version:
+			//echo "$text<br>\n";
 		}
 
 		return true;
