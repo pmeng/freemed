@@ -629,29 +629,29 @@ class PatientInterface {
 				$either = $criteria;
 			}
 		}
-		$last = trim( $last );
-		$first = trim( $first );
-		$either = trim( $either );
+		$last = strtolower(trim( $last ));
+		$first = strtolower(trim( $first ));
+		$either = strtolower(trim( $either ));
 
 		if ($first and $last) {
-			$q[] = "ptfname LIKE '".addslashes($either)."%'";
-			$q[] = "ptlname LIKE '".addslashes($either)."%'";
-			$q[] = "( ptlname LIKE '".addslashes($last)."%' AND ".
-				" ptfname LIKE '".addslashes($first)."%' )";
+			$q[] = "LOWER(ptfname) LIKE '".addslashes($either)."%'";
+			$q[] = "LOWER(ptlname) LIKE '".addslashes($either)."%'";
+			$q[] = "( LOWER(ptlname) LIKE '".addslashes($last)."%' AND ".
+				" LOWER(ptfname) LIKE '".addslashes($first)."%' )";
 		} elseif ($first) {
-			$q[] = "ptfname LIKE '".addslashes($either)."%'";
-			$q[] = "ptlname LIKE '".addslashes($either)."%'";
-                	$q[] = "ptfname LIKE '".addslashes($first)."%'";
-                	$q[] = "ptid LIKE '%".addslashes($first)."%'";
+			$q[] = "LOWER(ptfname) LIKE '".addslashes($either)."%'";
+			$q[] = "LOWER(ptlname) LIKE '".addslashes($either)."%'";
+                	$q[] = "LOWER(ptfname) LIKE '".addslashes($first)."%'";
+                	$q[] = "LOWER(ptid) LIKE '%".addslashes($first)."%'";
 		} elseif ($last) {
-			$q[] = "ptfname LIKE '".addslashes($either)."%'";
-			$q[] = "ptlname LIKE '".addslashes($either)."%'";
-                	$q[] = "ptlname LIKE '".addslashes($last)."%'";
-                	$q[] = "ptid LIKE '%".addslashes($last)."%'";
+			$q[] = "LOWER(ptfname) LIKE '".addslashes($either)."%'";
+			$q[] = "LOWER(ptlname) LIKE '".addslashes($either)."%'";
+                	$q[] = "LOWER(ptlname) LIKE '".addslashes($last)."%'";
+                	$q[] = "LOWER(ptid) LIKE '%".addslashes($last)."%'";
 		} else {
-			$q[] = "ptfname LIKE '".addslashes($either)."%'";
-			$q[] = "ptlname LIKE '".addslashes($either)."%'";
-			$q[] = "ptid LIKE '%".addslashes($either)."%'";
+			$q[] = "LOWER(ptfname) LIKE '".addslashes($either)."%'";
+			$q[] = "LOWER(ptlname) LIKE '".addslashes($either)."%'";
+			$q[] = "LOWER(ptid) LIKE '%".addslashes($either)."%'";
 		}
 
 		$query = "SELECT * FROM patient WHERE ( ".join(' OR ', $q)." ) ".
