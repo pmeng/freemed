@@ -4,9 +4,10 @@
  // Authors:
  // 	Jeff Buchbinder <jeff@freemedsoftware.org>
  //     Mark Lesswin <lesswin@ibm.net>
+ //	Philipp Meng <philipp@pmeng.org>
  //
  // FreeMED Electronic Medical Record and Practice Management System
- // Copyright (C) 1999-2012 FreeMED Software Foundation
+ // Copyright (C) 1999-2015 FreeMED Software Foundation
  //
  // This program is free software; you can redistribute it and/or modify
  // it under the terms of the GNU General Public License as published by
@@ -35,8 +36,9 @@ class IcdCodes extends SupportModule {
 
 	var $table_name 	 = "icd9";
 	var $record_name	 = "ICD9 Code";
-	var $order_field	 = "icd9code,icdnum";
-	var $widget_hash	 = "##icd9code## ##icd9descrip##";
+//	Set dynamically in constructor
+//	var $order_field	 = "icd9code,icdnum";
+//	var $widget_hash	 = "##icd9code## ##icd9descrip##";
 	var $archive_field = "icdarchive";
 	var $variables = array (
 		"icd9code",
@@ -56,6 +58,17 @@ class IcdCodes extends SupportModule {
 			__("Code")        => 	"icd9code",
 			__("Description") =>	"icd9descrip"
 		);
+
+	//change variables according to ICD Version:
+                switch (freemed::config_value('icd')) {
+                        case '10':
+                                $suffix = '10'; break;
+                        case '9':
+                        default: 
+                                $suffix = '9'; break;
+                }
+	        $this->widget_hash = "##icd".$suffix."code## ##icd".$suffix."descrip##";
+		$this->order_field = "icd".$suffix."code,icdnum";
 
 		parent::__construct( );
 	} // end constructor IcdCodes
