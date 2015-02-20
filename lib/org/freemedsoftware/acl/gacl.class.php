@@ -184,7 +184,7 @@ class gacl {
 
 		if ($this->_debug) {
 			//Write to syslog to not loose the debug messages
-			syslog(LOG_DEBUG, "$text<br>\n";
+			syslog(LOG_DEBUG, "$text<br>\n");
 			//Original version:
 			//echo "$text<br>\n";
 		}
