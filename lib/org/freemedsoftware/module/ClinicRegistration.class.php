@@ -49,6 +49,7 @@ class ClinicRegistration extends SupportModule {
 		, "gender"
 		, "age"
 		, "notes"
+		, "user"
 	);
 
 	public function __construct ( ) {
