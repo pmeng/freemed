@@ -324,3 +324,12 @@ CALL config_Register (
 	''
 );
 
+CALL config_Register (
+	'icd',
+	'10',
+	'ICD Version to be used',
+	'ICD',
+	'Select',
+	'9,10'
+);
+
